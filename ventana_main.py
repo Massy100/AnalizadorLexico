@@ -26,30 +26,30 @@ def main():
             self.vscrollbar.pack(side=tk.RIGHT, fill=tk.Y)
             self.listbox.pack()
 
-
-
-
     def efectos_al_mostrar_archivo():
-        mostrar_archivo()
-        mostrar_deteccion_de_error()
-        mostrar_tokens()
-
-    def mostrar_archivo():
-        linea = ""
         direccion = busqueda_del_archivo.mostrar_archivo()
-        listbox_frame.listbox.delete(0, tk.END)
-        with open(direccion, 'r', encoding='utf-8') as archivo:
-            contenido = archivo.read()
-            for i in contenido:
-                if i == "\n":
-                    listbox_frame.listbox.insert(tk.END, (linea))
-                    linea = ""
-                linea += i
-            listbox_frame.listbox.insert(tk.END, (linea))
-    
-    def mostrar_deteccion_de_error():
+        mostrar_archivo(direccion)
+        mostrar_deteccion_de_error(direccion)
+        mostrar_tokens(direccion)
+
+    def mostrar_archivo(direccion):
         linea = ""
-        texto = deteccion_de_errores.mostrar_errores()
+        listbox_frame.listbox.delete(0, tk.END)
+        try:
+            with open(direccion, 'r', encoding='utf-8') as archivo:
+                contenido = archivo.read()
+                for i in contenido:
+                    if i == "\n":
+                        listbox_frame.listbox.insert(tk.END, (linea))
+                        linea = ""
+                    linea += i
+                listbox_frame.listbox.insert(tk.END, (linea))
+        except FileNotFoundError:
+            listbox_frame.listbox.insert(tk.END, "Archivo no encontrado.")
+    
+    def mostrar_deteccion_de_error(direccion):
+        linea = ""
+        texto = deteccion_de_errores.mostrar_errores(direccion)
         listbox_frame2.listbox.delete(0, tk.END)
         for i in texto:
             if i == "\n":
@@ -58,9 +58,9 @@ def main():
             linea += i
         listbox_frame2.listbox.insert(tk.END, (linea))
 
-    def mostrar_tokens():
+    def mostrar_tokens(direccion):
         linea = ""
-        texto = almacenamiento_y_uso_de_tokens.mostrar_tokens()
+        texto = almacenamiento_y_uso_de_tokens.mostrar_tokens(direccion)
         listbox_frame3.listbox.delete(0, tk.END)
         for i in texto:
             if i == "\n":
@@ -69,9 +69,8 @@ def main():
             linea += i
         listbox_frame3.listbox.insert(tk.END, (linea))
     
-    
     root = tk.Tk()
-    root.title("Lista con barras de desplazamiento")
+    root.title("Analizador Lexico")
     root.geometry("700x600")
 
     boton_busqueda = ttk.Button(root, text = "Abrir archivo", command=efectos_al_mostrar_archivo)

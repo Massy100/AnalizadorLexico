@@ -1,0 +1,9 @@
+entero x = 10;
+@variable_invalida
+si (x >= 5) {
+    hacer algo;
+}
+cadena texto = "Hola mundo;
+# Otro error con símbolo inválido
+decimal número = 3.1456; 
+booleano resultado = verdadero?;  
