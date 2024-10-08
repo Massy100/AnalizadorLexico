@@ -1,9 +1,14 @@
-entero x = 10;
-@variable_invalida
-si (x >= 5) {
-    hacer algo;
+entero a = 5;
+decimal b = 10.5;
+si (a > 0) {
+    hacer algo;  # Error sintáctico: falta ':'
 }
-cadena texto = "Hola mundo;
-# Otro error con símbolo inválido
-decimal número = 3.1456; 
-booleano resultado = verdadero?;  
+sino {
+    entero c 0;  # Error semántico: falta '='
+}
+decimal calcular_area(base, altura) {  # Error semántico: falta tipo de retorno
+    return base * altura;  # Error semántico: 'return' debe estar dentro de la función
+}
+# Error léxico: caracter no permitido @ en la línea siguiente
+entero x @ 10;  
+
