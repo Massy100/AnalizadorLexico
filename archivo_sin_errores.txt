@@ -1,6 +1,5 @@
-entero a = 10
-entero b = 5
+entero a = 5
+entero b = 10 * a
 entero calcular_area(entero base entero altura)
     return base * altura
-
 calcular_area(a b)

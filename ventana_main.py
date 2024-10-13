@@ -51,14 +51,34 @@ def main():
 
     def mostrar_deteccion_de_error(direccion):
         linea = ""
-        texto = deteccion_de_errores.mostrar_errores(direccion)
+        texto_le = deteccion_de_errores.mostrar_errores_lexicos(direccion)
+        texto_si = deteccion_de_errores.mostrar_errores_sintacticos(direccion)
+        texto_se = deteccion_de_errores.mostrar_errores_semanticos(direccion)
         listbox_frame2.listbox.delete(0, tk.END)
-        for i in texto:
+        listbox_frame4.listbox.delete(0, tk.END)
+        listbox_frame5.listbox.delete(0, tk.END)
+        for i in texto_le:
             if i == "\n":
                 listbox_frame2.listbox.insert(tk.END, (linea))
                 linea = ""
             linea += i
         listbox_frame2.listbox.insert(tk.END, (linea))
+
+        linea = ""
+        for i in texto_si:
+            if i == "\n":
+                listbox_frame4.listbox.insert(tk.END, (linea))
+                linea = ""
+            linea += i
+        listbox_frame4.listbox.insert(tk.END, (linea))
+
+        linea = ""
+        for i in texto_se:
+            if i == "\n":
+                listbox_frame5.listbox.insert(tk.END, (linea))
+                linea = ""
+            linea += i
+        listbox_frame5.listbox.insert(tk.END, (linea))
 
     def mostrar_tokens(direccion):
         linea = ""
@@ -114,22 +134,22 @@ def main():
     listbox_frame.pack(pady=5, padx=(100, 0))
 
     # Errores léxicos
-    texto1 = ttk.Label(frame_contenido, text="Errores:")
+    texto1 = ttk.Label(frame_contenido, text="Errores Léxicos:")
     texto1.pack(pady=5, padx=(100, 0))
     listbox_frame2 = ListboxFrame(frame_contenido)
     listbox_frame2.pack(pady=5, padx=(100, 0))
 
-    # # Errores sintácticos
-    # texto2 = ttk.Label(frame_contenido, text="Errores Sintácticos:")
-    # texto2.pack(pady=5, padx=(100, 0))
-    # listbox_frame4 = ListboxFrame(frame_contenido)
-    # listbox_frame4.pack(pady=5, padx=(100, 0))
+    #Errores sintácticos
+    texto2 = ttk.Label(frame_contenido, text="Errores Sintácticos:")
+    texto2.pack(pady=5, padx=(100, 0))
+    listbox_frame4 = ListboxFrame(frame_contenido)
+    listbox_frame4.pack(pady=5, padx=(100, 0))
 
-    # # Errores semánticos
-    # texto3 = ttk.Label(frame_contenido, text="Errores Semánticos:")
-    # texto3.pack(pady=5, padx=(100, 0))
-    # listbox_frame5 = ListboxFrame(frame_contenido)
-    # listbox_frame5.pack(pady=5, padx=(100, 0))
+    # Errores semánticos
+    texto3 = ttk.Label(frame_contenido, text="Errores Semánticos:")
+    texto3.pack(pady=5, padx=(100, 0))
+    listbox_frame5 = ListboxFrame(frame_contenido)
+    listbox_frame5.pack(pady=5, padx=(100, 0))
 
     # Tokens
     texto4 = ttk.Label(frame_contenido, text="Tokens:")
