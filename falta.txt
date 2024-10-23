@@ -1,0 +1,9 @@
+sintactico:
+retornar tipos de variables invalidos en una funcion (por ejemplo que la funcion indique de devuelve un string y devuelva un numero en realidad)
+declarar los tipos de datos de las variables y que estos coincidan en operaciones y funciones (cocnatenar libre)
+division por cero
+
+semantico:
+que las llavec coinicidan, los parentesis, 
+if lleva else
+while siempre lleva un print adentro
