@@ -52,8 +52,8 @@ def main():
     def mostrar_deteccion_de_error(direccion):
         linea = ""
         texto_le = deteccion_de_errores.mostrar_errores_lexicos(direccion)
-        texto_si = deteccion_de_errores.mostrar_errores_sintacticos(direccion)
         texto_se = deteccion_de_errores.mostrar_errores_semanticos(direccion)
+        texto_si = deteccion_de_errores.mostrar_errores_sintacticos(direccion)
         listbox_frame2.listbox.delete(0, tk.END)
         listbox_frame4.listbox.delete(0, tk.END)
         listbox_frame5.listbox.delete(0, tk.END)

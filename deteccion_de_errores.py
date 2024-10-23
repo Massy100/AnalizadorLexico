@@ -23,8 +23,35 @@ def mostrar_errores_sintacticos(direccion_archivo):
             # Detección de errores sintácticos
             if linea.count(':') < linea.count('si'):
                 errores_sintacticos.append(
-                    f' Falta ":" en la línea {numero_linea}'
+                    f'Falta ":" en la línea {numero_linea}'
                 )
+        
+            # Detección de división por cero
+            if 'calcular_division' in linea and ', 0' in linea:
+                errores_sintacticos.append(
+                    f'División por cero en la línea {numero_linea}'
+                )
+
+            if 'decimal' in linea and '(' in linea:
+                for  numero_linea2, linea2 in enumerate(lineas[numero_linea:], start=numero_linea):
+                    if '}' in linea2:
+                        break
+                    if 'return' in linea2 and '"' in linea2:
+                        errores_sintacticos.append(
+                        f'Retorno de variable str en decimal en la línea {numero_linea2}'
+                        )
+                        break
+            
+            if 'decimal' in linea and '=' in linea and '"' in linea:
+                errores_sintacticos.append(
+                        f'Ingreso de str en un decimal en la línea {numero_linea2}'
+                        )
+                        
+                
+
+                
+            
+            
 
         if not errores_sintacticos:
             return "No se detectaron errores."
@@ -43,6 +70,7 @@ def mostrar_errores_semanticos(direccion_archivo):
     try:
         with open(direccion_archivo, 'r', encoding='utf-8') as archivo:
             lineas = archivo.readlines()
+            max_linea = len(lineas)
 
         for numero_linea, linea in enumerate(lineas, start=1):
             # Detección de errores semánticos 
@@ -52,11 +80,35 @@ def mostrar_errores_semanticos(direccion_archivo):
                 for tipo, nombre in var_declarada:
                     funciones_declaradas.add(nombre)  # Agregar a las funciones declaradas
             
-            # Detección de división por cero
-            if 'calcular_area' in linea and '0' in linea:
+            if '(' in linea and ')' not in linea:
+                    errores_semanticos.append(
+                    f'Parentesis no cerrado en linea {numero_linea}'
+                    )
+            if '[' in linea and ']' not in linea:
+                    errores_semanticos.append(
+                    f'Corchetes no cerrado en linea {numero_linea}'
+                    )
+
+            if '{' in linea and '}' in linea:
                 errores_semanticos.append(
-                    f'División por cero en la línea {numero_linea}'
-                )
+                        f'Llaves cerrando en la misma linea {numero_linea}'
+                        )
+
+            if '{' in linea:
+                for  numero_linea2, linea2 in enumerate(lineas[numero_linea:], start=numero_linea):
+                    if '}' in linea2:
+                        break
+                    if '{' in linea2: #ESTO ESGA MAL PARA EL FUTURO !!! ALERTA PIDELE A MASSY QUE O RESUELVA ELLA SI HIZO EL EXAMEN FINAL DE LAB
+                        errores_semanticos.append(
+                        f'Llaves no cerradas {numero_linea2}'
+                        )
+                    if numero_linea2 == max_linea and '}' not in linea2:
+                        errores_semanticos.append(
+                        f'Llaves nunca cerradas {numero_linea2}'
+                        )
+                    
+
+
             
             # Validar uso de funciones
             for funcion in funciones_declaradas:

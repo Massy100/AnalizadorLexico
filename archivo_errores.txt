@@ -2,13 +2,15 @@ entero a = 5;
 decimal b = 10.5;
 si (a > 0) {
     hacer algo;  # Error sintáctico: falta ':'
-}
-sino {
+} sino {
     entero c 0;  # Error semántico: falta '='
+decimal prueba(:{
+    return "hola"
 }
-decimal calcular_area(base, altura) {  # Error semántico: falta tipo de retorno
-    return base * altura;  # Error semántico: 'return' debe estar dentro de la función
+decimal calcular_division(base, altura) :{  # Error semántico: falta tipo de retorno
+    return base / altura;  # Error semántico: 'return' debe estar dentro de la función
 }
+calcular_division(1, 0)
 # Error léxico: caracter no permitido @ en la línea siguiente
 entero x @ 10;  
 
