@@ -5,5 +5,5 @@ division por cero  X
 
 semantico:
 que las llavec coinicidan, los parentesis, X
-if lleva else
-while siempre lleva un print adentro
+if lleva else X
+while siempre lleva un print adentro X

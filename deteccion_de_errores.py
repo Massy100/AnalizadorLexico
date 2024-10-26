@@ -93,6 +93,26 @@ def mostrar_errores_semanticos(direccion_archivo):
                 errores_semanticos.append(
                         f'Llaves cerrando en la misma linea {numero_linea}'
                         )
+            
+            if 'si ' in linea and '{' in linea and 'sino' not in linea:
+                for  numero_linea2, linea2 in enumerate(lineas[numero_linea:], start=numero_linea):
+                    if numero_linea2 + 1 == max_linea:
+                        errores_semanticos.append(
+                        f'Un "si" sin "sino" en la linea {numero_linea} '
+                        )
+                        break
+                    if '}' in linea2 and 'sino' in linea2 and '{' in linea2:
+                        break
+            
+            if 'while ' in linea and '{' in linea :
+                for  numero_linea2, linea2 in enumerate(lineas[numero_linea:], start=numero_linea):
+                    if numero_linea2 + 1 == max_linea:
+                        errores_semanticos.append(
+                        f'while sin print en la linea {numero_linea} '
+                        )
+                        break
+                    if 'print ' in linea2:
+                        break
 
             if '{' in linea:
                 for  numero_linea2, linea2 in enumerate(lineas[numero_linea:], start=numero_linea):
@@ -100,9 +120,9 @@ def mostrar_errores_semanticos(direccion_archivo):
                         break
                     if '{' in linea2: #ESTO ESGA MAL PARA EL FUTURO !!! ALERTA PIDELE A MASSY QUE O RESUELVA ELLA SI HIZO EL EXAMEN FINAL DE LAB
                         errores_semanticos.append(
-                        f'Llaves no cerradas {numero_linea2}'
+                        f'Llaves no cerradas en la linea {numero_linea2}'
                         )
-                    if numero_linea2 == max_linea and '}' not in linea2:
+                    if numero_linea2 + 1 == max_linea and '}' not in linea2:
                         errores_semanticos.append(
                         f'Llaves nunca cerradas {numero_linea2}'
                         )
@@ -111,11 +131,11 @@ def mostrar_errores_semanticos(direccion_archivo):
 
             
             # Validar uso de funciones
-            for funcion in funciones_declaradas:
-                if funcion not in linea:
-                    errores_semanticos.append(
-                        f'Función "{funcion}" no utilizada en la línea {numero_linea}'
-                    )
+            #for funcion in funciones_declaradas:
+            #    if funcion not in linea:
+            #        errores_semanticos.append(
+            #            f'Función "{funcion}" no utilizada en la línea {numero_linea}'
+            #        )
 
         if not errores_semanticos:
             return "No se detectaron errores."

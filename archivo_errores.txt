@@ -7,10 +7,16 @@ si (a > 0) {
 decimal prueba(:{
     return "hola"
 }
+si (a < 0) {
+    print "es menor"
+}
 decimal calcular_division(base, altura) :{  # Error semántico: falta tipo de retorno
     return base / altura;  # Error semántico: 'return' debe estar dentro de la función
 }
 calcular_division(1, 0)
 # Error léxico: caracter no permitido @ en la línea siguiente
 entero x @ 10;  
+while {
+    none
+}
 
