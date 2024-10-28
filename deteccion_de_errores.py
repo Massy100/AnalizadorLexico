@@ -91,7 +91,7 @@ def mostrar_errores_semanticos(direccion_archivo):
 
             if '{' in linea and '}' in linea:
                 errores_semanticos.append(
-                        f'Llaves cerrando en la misma linea {numero_linea}'
+                        f'Llaves no cerradas en la misma linea {numero_linea}'
                         )
             
             if 'si ' in linea and '{' in linea and 'sino' not in linea:
